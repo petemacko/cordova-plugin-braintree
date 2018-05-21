@@ -32,7 +32,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     NSString *bundle_id = [NSBundle mainBundle].bundleIdentifier;
-    bundle_id = [bundle_id stringByAppendingString:@".payments"];
+    bundle_id = [bundle_id stringByAppendingString:@"braintree.payments"];
 
     if ([url.scheme localizedCaseInsensitiveCompare:bundle_id] == NSOrderedSame) {
         return [BTAppSwitch handleOpenURL:url sourceApplication:sourceApplication];
@@ -84,7 +84,7 @@ NSString *countryCode;
     }
 
     NSString *bundle_id = [NSBundle mainBundle].bundleIdentifier;
-    bundle_id = [bundle_id stringByAppendingString:@".payments"];
+    bundle_id = [bundle_id stringByAppendingString:@"braintree.payments"];
 
     [BTAppSwitch setReturnURLScheme:bundle_id];
 

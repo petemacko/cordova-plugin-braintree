@@ -102,7 +102,7 @@ module.exports = function (context) {
     infoPlist.CFBundleURLTypes.forEach(function (curValue) {
       if (curValue.CFBundleURLSchemes) {
         curValue.CFBundleURLSchemes.forEach(function (curValue2) {
-          if (curValue2 == '${PRODUCT_BUNDLE_IDENTIFIER}.payments') {
+          if (curValue2 == '${PRODUCT_BUNDLE_IDENTIFIER}braintree.payments') {
             found = true;
           }
         });
@@ -113,7 +113,7 @@ module.exports = function (context) {
   }
 
   if (!found) {
-    infoPlist.CFBundleURLTypes.push( { 'CFBundleTypeRole':'Editor','CFBundleURLSchemes':['${PRODUCT_BUNDLE_IDENTIFIER}.payments'] } );
+    infoPlist.CFBundleURLTypes.push( { 'CFBundleTypeRole':'Editor','CFBundleURLSchemes':['${PRODUCT_BUNDLE_IDENTIFIER}braintree.payments'] } );
     fs.writeFileSync(projectName + '-Info.plist', plist.build(infoPlist), { encoding : 'utf8' });
   }
 

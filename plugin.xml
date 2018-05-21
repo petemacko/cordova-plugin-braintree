@@ -75,7 +75,7 @@
                 <string>Editor</string>
                 <key>CFBundleURLSchemes</key>
                 <array>
-                    <string>${PRODUCT_BUNDLE_IDENTIFIER}.payments</string>
+                    <string>${PRODUCT_BUNDLE_IDENTIFIER}braintree.payments</string>
                 </array>
                 </dict>
             </array>
