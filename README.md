@@ -25,7 +25,7 @@ To add the plugin to your Cordova project, first remove the iOS platform, instal
 
 ```bash
     cordova platform remove ios
-    cordova plugin add https://github.com/engineerapart/cordova-plugin-braintree
+    cordova plugin add https://github.com/fbognini/cordova-plugin-braintree
     cordova platform add ios
 ```
 
