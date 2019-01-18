@@ -11,7 +11,7 @@ This version of the plugin uses versions `4.14.0` (iOS) and `2.12.0` (Android) o
 
 **This plugin is still in development.**
 
-# Install
+# Install  
 
 Please ensure you are on a reasonably recent version of Node. The install script uses ES6 features that require at least node 7.
 
