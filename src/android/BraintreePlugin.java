@@ -165,21 +165,27 @@ public final class BraintreePlugin extends CordovaPlugin implements PaymentMetho
 
         dropInRequest.amount(amount);
 
-        if (dropInRequest.isAndroidPayEnabled()) {
-            // // TODO: Make this conditional
-            // dropInRequest.androidPayCart(Cart.newBuilder()
-            //     .setCurrencyCode("GBP")
-            //     .setTotalPrice(amount)
-            //     .addLineItem(LineItem.newBuilder()
-            //         .setCurrencyCode("GBP")
-            //         .setDescription(primaryDescription)
-            //         .setQuantity("1")
-            //         .setUnitPrice(amount)
-            //         .setTotalPrice(amount)
-            //         .build())
-            //     .build()
-            // );
-        }
+        //        if (dropInRequest.isAndroidPayEnabled()) {
+        //            // // TODO: Make this conditional
+        //            // dropInRequest.androidPayCart(Cart.newBuilder()
+        //            //     .setCurrencyCode("GBP")
+        //            //     .setTotalPrice(amount)
+        //            //     .addLineItem(LineItem.newBuilder()
+        //            //         .setCurrencyCode("GBP")
+        //            //         .setDescription(primaryDescription)
+        //            //         .setQuantity("1")
+        //            //         .setUnitPrice(amount)
+        //            //         .setTotalPrice(amount)
+        //            //         .build())
+        //            //     .build()
+        //            // );
+        //        }
+
+        dropInRequest.disablePayPal();
+        dropInRequest.vaultManager(true);
+        dropInRequest.disableAndroidPay();
+        dropInRequest.disableVenmo();
+        dropInRequest.disableGooglePayment();
 
         this.cordova.setActivityResultCallback(this);
 

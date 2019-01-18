@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/braintree",
+  "_id": "@ionic-native/braintree@4.19.0",
+  "_inBundle": false,
+  "_integrity": "sha512-oP6m6Xzl6E6yHB/9p8+F48N8H/jGQEJ1yv6/0E5fCuKn9oG/NjHQaAqJgYx5Tvy3fgKX0fj2omA9aO8vo36BBw==",
+  "_location": "/@ionic-native/braintree",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/braintree",
+    "name": "@ionic-native/braintree",
+    "escapedName": "@ionic-native%2fbraintree",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/braintree/-/braintree-4.19.0.tgz",
+  "_shasum": "3e29282f4a18ad87c0656665719ed529491f48ad",
+  "_spec": "@ionic-native/braintree",
+  "_where": "/Users/pete/packsol/hellopackagemobile",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/braintree",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.11.0",
+    "@angular/core": "*",
+    "rxjs": "^5.5.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.19.0"
+}
