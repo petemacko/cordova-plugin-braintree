@@ -68,12 +68,13 @@
           </array>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
-            <string>Allows you to scan credit card using your camera.</string>
-        </config-file>
-        <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
-            <string>Allows you to scan credit card using your camera.</string>
-        </config-file>
+        <!--Apparently the BrainTree client libray doesn't do this any longer-->
+        <!--<config-file target="*-Info.plist" parent="NSCameraUsageDescription">-->
+            <!--<string>Allows you to scan credit card using your camera.</string>-->
+        <!--</config-file>-->
+        <!--<config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">-->
+            <!--<string>Allows you to scan credit card using your camera.</string>-->
+        <!--</config-file>-->
 
         <framework src="PassKit.framework" />
 

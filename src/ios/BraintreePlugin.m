@@ -53,6 +53,10 @@ bool applePayInited = NO;
 NSString *applePayMerchantID;
 NSString *currencyCode;
 NSString *countryCode;
+bool useVaultManager = NO;
+bool disablePayPal = NO;
+bool disableVenmo = NO;
+bool useThreeDSecureVerification = NO;
 
 #pragma mark - Cordova commands
 
@@ -121,6 +125,32 @@ NSString *countryCode;
     }
 }
 
+- (void)setUseVaultManager:(CDVInvokedUrlCommand *)command {
+
+    // Ensure the client has been initialized.
+    if (!self.braintreeClient) {
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The Braintree client must first be initialized via BraintreePlugin.initialize(token)"];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+        return;
+    }
+
+    if ([command.arguments count] != 1) {
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"useVaultManager is required (ex: {useVaultManager: false})"];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+        return;
+    }
+
+    @try {
+        useVaultManager = [command.arguments objectAtIndex:0];
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+    } @catch (NSException *exception) {
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[NSString stringWithFormat: @"An error occurred while setting 'useVaultManager': %@", exception]];
+        [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
+        return;
+    }
+}
+
 - (void)presentDropInPaymentUI:(CDVInvokedUrlCommand *)command {
 
     // Ensure the client has been initialized.
@@ -158,6 +188,10 @@ NSString *countryCode;
     BTDropInRequest *paymentRequest = [[BTDropInRequest alloc] init];
     paymentRequest.amount = amount;
     paymentRequest.applePayDisabled = !applePayInited;
+    paymentRequest.vaultManager = useVaultManager;
+    paymentRequest.paypalDisabled = disablePayPal;
+    paymentRequest.venmoDisabled = disableVenmo;
+    paymentRequest.threeDSecureVerification = useThreeDSecureVerification;
 
     BTDropInController *dropIn = [[BTDropInController alloc] initWithAuthorization:self.token request:paymentRequest handler:^(BTDropInController * _Nonnull controller, BTDropInResult * _Nullable result, NSError * _Nullable error) {
         [self.viewController dismissViewControllerAnimated:YES completion:nil];

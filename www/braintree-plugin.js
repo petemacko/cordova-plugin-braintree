@@ -63,6 +63,30 @@ BraintreePlugin.setupApplePay = function setupApplePay(options, successCallback,
 };
 
 /**
+ * Used to set whether or not the drop-in UI allows editing saved payment options on iOS and Android.
+ *
+ * @param {object} options - {useVaultManager: true/false}.
+ * @param [function] successCallback - The success callback for this asynchronous function.
+ * @param [function] failureCallback - The failure callback for this asynchronous function; receives an error string.
+ */
+BraintreePlugin.setUseVaultManager = function setUseVaultManager(options, successCallback, failureCallback) {
+    if (!options) {
+        options = {};
+    }
+
+    if (typeof (options.useVaultManger) !== 'boolean') {
+        failureCallback('useVaultManager must be provided, and must be a boolean');
+    }
+
+    var pluginOptions = [
+        options.useVaultManger
+    ];
+
+    exec(successCallback, failureCallback, PLUGIN_ID, 'setUseVaultManager', pluginOptions);
+};
+
+
+/**
  * Shows Braintree's drop-in payment UI.
  *
  * @param {object} options - The options used to control the drop-in payment UI.
