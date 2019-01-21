@@ -45,6 +45,7 @@ public final class BraintreePlugin extends CordovaPlugin implements PaymentMetho
     private CallbackContext _callbackContext = null;
     private BraintreeFragment braintreeFragment = null;
     private String temporaryToken = null;
+    private long startActivityTicks = 0;
 
     @Override
     public synchronized boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -198,6 +199,12 @@ public final class BraintreePlugin extends CordovaPlugin implements PaymentMetho
                 return;
             }
 
+            //Cordova sucks hard. Second time you start the activity for the braintree plugin,
+            //the system sends a 'cancel' message to this class before the braintree code
+            //even gets a call. Tried debugging and stepping though but nothing explains the issue.
+            //For now, setting a tick timer and rejecting any cancels that come within 1/10th a sec
+            //after calling startActivityForResult. Sure hope users aren't fast on the cancel button!
+            startActivityTicks = System.currentTimeMillis( );
             this.cordova.startActivityForResult(this, intent, DROP_IN_REQUEST);
         } catch (Exception e) {
             Log.e(TAG, "presentDropInPaymentUI failed with error ===> " + e.getMessage());
@@ -273,6 +280,8 @@ public final class BraintreePlugin extends CordovaPlugin implements PaymentMetho
      */
     private void handleDropInPaymentUiResult(int resultCode, PaymentMethodNonce paymentMethodNonce) {
 
+        long nowMillis = System.currentTimeMillis( );
+
         Log.i(TAG, "handleDropInPaymentUiResult resultCode ==> " + resultCode + ", paymentMethodNonce = " + paymentMethodNonce);
 
         if (_callbackContext == null) {
@@ -281,6 +290,9 @@ public final class BraintreePlugin extends CordovaPlugin implements PaymentMetho
         }
 
         if (resultCode == Activity.RESULT_CANCELED) {
+            if(nowMillis - startActivityTicks < 100) {
+                return;
+            }
             Map<String, Object> resultMap = new HashMap<String, Object>();
             resultMap.put("userCancelled", true);
             _callbackContext.success(new JSONObject(resultMap));
